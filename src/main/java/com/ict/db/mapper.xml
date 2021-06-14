@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gestbook">
+		<!-- <select id="" parameterType="" resultType=""> -->
+		<select id="list" resultType="com.ict.db.VO">
+			select * from gestbook order by idx		
+		</select>
+		
+		<!-- ?대신 #{} -->
+		<select id="onelist" parameterType="String" resultType="com.ict.db.VO">
+			select * from gestbook where idx = #{idx}
+		</select>
+		
+		<!-- insert, update, delete는 resultType이 없다. (결과가 무조건 숫자이므로) -->
+		<insert id="insert" parameterType="com.ict.db.VO">
+			insert into gestbook values(gestbook_seq.nextval, #{name}, #{title}, #{email}, #{pw}, #{content}, sysdate)
+		</insert>
+		
+		<delete id="delete" parameterType="com.ict.db.VO">
+			delete from gestbook where idx = #{idx}
+		</delete>
+		
+		<update id="update" parameterType="com.ict.db.VO">
+			update gestbook set name=#{name}, title=#{title}, content=#{content}, email=#{email} where idx=#{idx}
+		</update>
+</mapper>
